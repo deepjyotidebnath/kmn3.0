@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Will you go on a date with me? ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Theme ===== */
+        
+        :root {
+            --pink: #ff6b9d;
+            --red: #e63950;
+            --lav: #c9b6ff;
+            --cream: #fff6ef;
+            --ink: #4a1f33;
+            --green: #2ecc71
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        
+        html,
+        body {
+            min-height: 100%
+        }
+        
+        body {
+            font-family: 'Poppins', system-ui, sans-serif;
+            color: var(--ink);
+            background: linear-gradient(135deg, #ffd6e7, #e9d8ff 50%, #ffe0e0);
+            background-attachment: fixed;
+            overflow-x: hidden
+        }
+        
+        #hearts {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0
+        }
+        
+        .fh {
+            position: absolute;
+            bottom: -40px;
+            animation: rise linear forwards;
+            opacity: .7
+        }
+        
+        @keyframes rise {
+            to {
+                transform: translateY(-110vh) rotate(40deg);
+                opacity: 0
+            }
+        }
+        /* Progress bar */
+        
+        #progress {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 10px 6px;
+            background: rgba(255, 246, 239, .85);
+            backdrop-filter: blur(8px);
+            font-size: .68rem;
+            font-weight: 600;
+            flex-wrap: wrap
+        }
+        
+        #progress span {
+            padding: 4px 10px;
+            border-radius: 99px;
+            background: #fff;
+            color: #b07a90;
+            transition: .3s
+        }
+        
+        #progress span.done {
+            background: var(--lav);
+            color: #fff
+        }
+        
+        #progress span.on {
+            background: linear-gradient(90deg, var(--pink), var(--red));
+            color: #fff;
+            transform: scale(1.08)
+        }
+        /* Pages */
+        
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 18px 14px 60px
+        }
+        
+        .page {
+            display: none;
+            animation: pop .5s ease
+        }
+        
+        .page.active {
+            display: block
+        }
+        
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.97)
+            }
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+        
+        .card {
+            background: var(--cream);
+            border-radius: 28px;
+            padding: 26px 20px;
+            box-shadow: 0 12px 35px rgba(230, 57, 80, .18);
+            text-align: center
+        }
+        
+        h1 {
+            font-size: clamp(1.6rem, 6vw, 2.3rem);
+            color: var(--red);
+            margin-bottom: 8px;
+            font-weight: 800
+        }
+        
+        h2 {
+            font-size: clamp(1.15rem, 4.5vw, 1.6rem);
+            margin: 10px 0
+        }
+        
+        .sub {
+            opacity: .8;
+            margin-bottom: 14px
+        }
+        
+        .big {
+            font-size: clamp(1.3rem, 5.5vw, 1.9rem);
+            font-weight: 700;
+            color: var(--pink);
+            margin: 12px 0 20px
+        }
+        
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            border-radius: 99px;
+            font-weight: 700;
+            transition: .2s
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            font-size: 1rem;
+            color: #fff;
+            background: linear-gradient(90deg, var(--pink), var(--red));
+            box-shadow: 0 6px 16px rgba(230, 57, 80, .35)
+        }
+        
+        .btn:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.04)
+        }
+        
+        .btn:disabled {
+            opacity: .45;
+            cursor: not-allowed
+        }
+        
+        .btn.green {
+            background: linear-gradient(90deg, #2ecc71, #17a589)
+        }
+        
+        .btn.alt {
+            background: linear-gradient(90deg, #a78bfa, #ff6b9d)
+        }
+        /* Page 1 */
+        
+        .teddy {
+            font-size: 5rem;
+            animation: bob 2s ease-in-out infinite;
+            display: inline-block
+        }
+        
+        .couple {
+            font-size: 2.4rem;
+            letter-spacing: 6px
+        }
+        
+        @keyframes bob {
+            50% {
+                transform: translateY(-10px) rotate(4deg)
+            }
+        }
+        
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+            min-height: 70px
+        }
+        
+        #yes {
+            font-size: 1.4rem;
+            padding: 18px 42px;
+            animation: pulse 1.4s infinite
+        }
+        
+        @keyframes pulse {
+            50% {
+                transform: scale(1.08)
+            }
+        }
+        
+        .noWrap {
+            min-width: 90px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+        
+        #no {
+            padding: 9px 18px;
+            font-size: .85rem;
+            background: #9a8c98;
+            color: #fff;
+            touch-action: none;
+            z-index: 50
+        }
+        
+        #toast {
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: #fff;
+            color: var(--red);
+            padding: 10px 20px;
+            border-radius: 99px;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
+            z-index: 100;
+            transition: .25s;
+            max-width: 92vw;
+            text-align: center
+        }
+        
+        #toast.show {
+            transform: translateX(-50%) scale(1)
+        }
+        
+        .boom {
+            position: fixed;
+            font-size: 1.6rem;
+            pointer-events: none;
+            z-index: 99;
+            animation: boom 1.3s ease-out forwards
+        }
+        
+        @keyframes boom {
+            to {
+                transform: translate(var(--x), var(--y)) rotate(360deg) scale(1.6);
+                opacity: 0
+            }
+        }
+        /* Calendar */
+        
+        .cal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px
+        }
+        
+        .cal-head button {
+            width: 40px;
+            height: 40px;
+            background: var(--lav);
+            color: #fff;
+            font-size: 1.2rem
+        }
+        
+        .cal-head button:disabled {
+            opacity: .3
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px
+        }
+        
+        .dow {
+            font-size: .7rem;
+            font-weight: 700;
+            color: var(--pink)
+        }
+        
+        .day {
+            aspect-ratio: 1;
+            background: #fff;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: .9rem;
+            color: var(--ink)
+        }
+        
+        .day:hover:not(:disabled) {
+            background: var(--lav);
+            color: #fff
+        }
+        
+        .day:disabled {
+            opacity: .3;
+            cursor: not-allowed;
+            background: #eee
+        }
+        
+        .day.sel {
+            background: linear-gradient(135deg, var(--pink), var(--red));
+            color: #fff;
+            transform: scale(1.1)
+        }
+        
+        .day.today {
+            outline: 2px dashed var(--pink)
+        }
+        
+        select {
+            font-family: inherit;
+            padding: 12px 18px;
+            border-radius: 99px;
+            border: 2px solid var(--lav);
+            font-size: 1rem;
+            margin: 14px 0;
+            background: #fff
+        }
+        
+        .note {
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--red);
+            min-height: 24px
+        }
+        /* Locations & menu */
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 16px 0
+        }
+        
+        .loc,
+        .food {
+            background: #fff;
+            border-radius: 22px;
+            padding: 18px 14px;
+            border: 3px solid transparent;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+            transition: .25s;
+            cursor: pointer
+        }
+        
+        .loc:hover {
+            transform: translateY(-6px) rotate(-1.5deg)
+        }
+        
+        .loc.sel {
+            border-color: var(--red);
+            background: #ffe3ea;
+            transform: scale(1.04)
+        }
+        
+        .loc .e,
+        .food .e {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 6px
+        }
+        
+        .loc small,
+        .food small {
+            display: block;
+            opacity: .8;
+            margin: 6px 0
+        }
+        
+        .food {
+            cursor: default
+        }
+        
+        .food:hover .e {
+            animation: bob 1s infinite
+        }
+        
+        .price {
+            font-weight: 800;
+            color: var(--red);
+            font-size: 1.15rem
+        }
+        
+        .food .btn {
+            padding: 9px 18px;
+            font-size: .85rem;
+            margin-top: 8px
+        }
+        
+        .cart {
+            background: #fff;
+            border-radius: 22px;
+            padding: 16px;
+            margin-top: 14px;
+            text-align: left
+        }
+        
+        .ci {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--lav);
+            flex-wrap: wrap
+        }
+        
+        .q {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+        
+        .q button {
+            width: 30px;
+            height: 30px;
+            background: var(--lav);
+            color: #fff
+        }
+        
+        .q .rm {
+            background: var(--red)
+        }
+        
+        .total {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--red);
+            text-align: right;
+            margin-top: 10px
+        }
+        /* Payment */
+        
+        .wallet {
+            font-size: 5rem;
+            display: inline-block;
+            animation: cry 1.2s infinite
+        }
+        
+        @keyframes cry {
+            50% {
+                transform: rotate(-8deg) translateY(4px)
+            }
+        }
+        
+        .notes {
+            position: relative;
+            height: 60px;
+            overflow: hidden
+        }
+        
+        .notes i {
+            position: absolute;
+            font-style: normal;
+            font-size: 1.8rem;
+            animation: fly 3s linear infinite
+        }
+        
+        @keyframes fly {
+            from {
+                transform: translate(0, 50px) rotate(0)
+            }
+            to {
+                transform: translate(60px, -70px) rotate(40deg);
+                opacity: 0
+            }
+        }
+        
+        .qr {
+            width: 110px;
+            height: 110px;
+            margin: 10px auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 8px;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            transform: rotate(-6deg)
+        }
+        
+        .qr b {
+            background: var(--ink);
+            border-radius: 2px
+        }
+        
+        .qr b.o {
+            background: transparent
+        }
+        
+        .qr::after {
+            content: "💔";
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-size: 2.6rem;
+            background: rgba(255, 255, 255, .55)
+        }
+        
+        .fail {
+            background: #ffe0e0;
+            color: var(--red);
+            font-weight: 800;
+            padding: 12px;
+            border-radius: 14px;
+            margin: 12px 0;
+            border: 2px dashed var(--red)
+        }
+        
+        .msgs p {
+            margin: 5px 0;
+            font-weight: 600
+        }
+        
+        .amt {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--red)
+        }
+        
+        .btns {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 14px
+        }
+        
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(74, 31, 51, .6);
+            display: none;
+            place-items: center;
+            z-index: 200;
+            padding: 16px
+        }
+        
+        .modal.show {
+            display: grid
+        }
+        
+        .modal div {
+            background: var(--cream);
+            padding: 28px 22px;
+            border-radius: 24px;
+            max-width: 340px;
+            text-align: center;
+            animation: pop .4s
+        }
+        
+        .modal p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+        /* Ending */
+        
+        .sum {
+            background: #fff;
+            border-radius: 18px;
+            padding: 14px;
+            text-align: left;
+            margin: 14px 0;
+            line-height: 1.8
+        }
+        
+        .final {
+            font-style: italic;
+            line-height: 1.7
+        }
+    </style>
+</head>
+
+<body>
+    <div id="hearts"></div>
+    <div id="progress"></div>
+    <div id="toast"></div>
+
+    <main>
+        <!-- PAGE 1: Proposal -->
+        <section class="page card active" id="p1">
+            <div class="teddy">🧸</div>
+            <div class="couple">👫💕</div>
+            <h1>Hey Beautiful! ❤️</h1>
+            <p class="sub">I have a very important question for you...</p>
+            <div class="big">Will you go on a date with me? 🥹👉👈</div>
+            <div class="row">
+                <button class="btn green" id="yes">YES! ❤️</button>
+                <div class="noWrap"><button id="no">NO 😒</button></div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: Calendar -->
+        <section class="page card" id="p2">
+            <h1>YAYYYY! 🥹❤️ You said YES!</h1>
+            <p class="sub">Now officially book a date with your favorite idiot.</p>
+            <div class="cal-head">
+                <button id="prev">‹</button>
+                <h2 id="monthLabel"></h2><button id="next">›</button>
+            </div>
+            <div class="grid" id="dows"></div>
+            <div class="grid" id="days" style="margin-top:6px"></div>
+            <select id="time">
+      <option>11 AM</option><option>2 PM</option><option>5 PM</option><option>7 PM</option>
+    </select><br>
+            <button class="btn" id="confirmDate" disabled>Confirm Our Date ❤️</button>
+            <div class="note" id="dateNote"></div>
+        </section>
+
+        <!-- PAGE 3: Location -->
+        <section class="page card" id="p3">
+            <h1>Where should we disappear together? 🌎❤️</h1>
+            <div class="cards" id="locs"></div>
+            <button class="btn" id="lockLoc" disabled>Lock Location ❤️</button>
+        </section>
+
+        <!-- PAGE 4: Menu -->
+        <section class="page card" id="p4">
+            <h1>Our Michelin-Star Date Menu 👨‍🍳😂</h1>
+            <p class="sub">Five-star romance. Zero-star financial condition.</p>
+            <div class="cards" id="menu"></div>
+            <div class="cart">
+                <h2>🛒 Your Cart (<span id="cnt">0</span> items)</h2>
+                <div id="cartList"></div>
+                <div class="total">Total: ₹<span id="tot">0</span></div>
+            </div>
+            <br><button class="btn" id="pay" disabled>Proceed to Payment 💳</button>
+        </section>
+
+        <!-- PAGE 5: Payment -->
+        <section class="page card" id="p5">
+            <div class="wallet">😭👛</div>
+            <div class="notes"><i style="left:15%">💸</i><i style="left:40%;animation-delay:1s">💸</i><i style="left:65%;animation-delay:2s">💸</i></div>
+            <div class="qr" id="qr" title="Broken QR (decorative only)"></div>
+            <h1>Taka rakh amar kache... taka nai 😭💸</h1>
+            <p class="sub">Baby, order toh diye dile... kintu taka ta tomar boyfriend-er kache nei! 😂</p>
+            <div class="amt">Total: ₹<span id="payTot">0</span></div>
+            <div class="fail">❌ Payment declined: Boyfriend is broke.</div>
+            <div class="msgs">
+                <p>Insufficient Boyfriend Balance!</p>
+                <p>Account balance: ₹0.69 😭</p>
+                <p>Love unlimited, budget limited.</p>
+                <p>EMI te prem korbi naki? 😂</p>
+                <p>Payment failed because boyfriend is berojgar.</p>
+            </div>
+            <div class="btns">
+                <button class="btn alt" id="askBf">Ask My Boyfriend to Pay 😂</button>
+                <button class="btn" id="finePay">Fine, I'll Pay for Us 😂❤️</button>
+            </div>
+        </section>
+
+        <!-- ENDING -->
+        <section class="page card" id="p6">
+            <div class="teddy">🥰</div>
+            <h1>Date Confirmed! ❤️</h1>
+            <div class="sum">
+                <div>📍 <b>Venue:</b> <span id="fVenue"></span></div>
+                <div>📅 <b>Date:</b> <span id="fDate"></span></div>
+                <div>⏰ <b>Time:</b> <span id="fTime"></span></div>
+                <div>🍽️ <b>Menu:</b> <span id="fMenu"></span></div>
+            </div>
+            <p class="final">Thank you for saying YES, baby. ❤️ Even if I have no money, I'll try my best to make you smile. You're my favorite person, and that's one thing I can afford every day. 🥹💗</p>
+            <br><button class="btn" id="again">Play Again 🔄</button>
+        </section>
+    </main>
+
+    <div class="modal" id="modal">
+        <div>
+            <p>Payment method accepted: Ekta mishti hashi ar ekta hug ❤️🤗</p>
+            <button class="btn" id="closeModal">Aww okay 🥹</button>
+        </div>
+    </div>
+
+    <script>
+        /* ===== Data ===== */
+        const STEPS = ['Proposal', 'Calendar', 'Location', 'Menu', 'Payment'];
+        const LOCS = [{
+            n: 'Siliguri',
+            e: '🌆',
+            d: 'A cute date in the city.'
+        }, {
+            n: 'Raiganj',
+            e: '🌸',
+            d: 'Romance with a little adventure.'
+        }, {
+            n: 'Cooch Behar',
+            e: '🏰',
+            d: 'Royal couple vibes.'
+        }, {
+            n: 'Narak',
+            e: '🔥',
+            d: 'Because dating me is already a punishment 😂'
+        }, {
+            n: 'Patal Lok',
+            e: '👹',
+            d: 'A date so legendary even Yamaraj gets jealous.'
+        }];
+        const MENU = [{
+            id: 0,
+            n: 'Chullu',
+            e: '🥤',
+            d: "Chef's special emotional support drink.",
+            p: 49
+        }, {
+            id: 1,
+            n: 'Chikar Chop',
+            e: '🍟',
+            d: 'Crispy outside, questionable decisions inside.',
+            p: 89
+        }, {
+            id: 2,
+            n: 'Banger Soup',
+            e: '🍲',
+            d: 'A legendary soup prepared with 100% imaginary ingredients.',
+            p: 119
+        }, {
+            id: 3,
+            n: 'Gobarer Khichuri',
+            e: '🍚',
+            d: 'Our signature dish. Michelin stars are still investigating.',
+            p: 149
+        }];
+        const NO_MSGS = ['Too slow! 😂', 'Nice try, baby!', 'No option is not available 😌', 'Bhagwan bhi chahte hain tum YES bolo! ❤️', 'Oops, my finger slipped 🙈', 'Arre arre arre! 😜'];
+        const $ = s => document.querySelector(s);
+        /* ===== State ===== */
+        let state, view;
+
+        function resetState() {
+            const t = new Date();
+            state = {
+                step: 0,
+                date: null,
+                time: '11 AM',
+                loc: null,
+                cart: {}
+            };
+            view = {
+                y: t.getFullYear(),
+                m: t.getMonth()
+            };
+        }
+        /* ===== Navigation + progress ===== */
+        function go(step) {
+            state.step = step;
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            $('#p' + (step + 1)).classList.add('active');
+            renderProgress(step);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function goEnd() {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            $('#p6').classList.add('active');
+            renderProgress(5);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function renderProgress(cur) {
+            $('#progress').innerHTML = STEPS.map((s, i) => `<span class="${i<cur?'done':i===cur?'on':''}">${s}</span>`).join('→');
+        }
+        /* ===== Floating hearts ===== */
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.className = 'fh';
+            h.textContent = ['❤️', '💖', '💗', '💕', '🌸'][Math.floor(Math.random() * 5)];
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.fontSize = (14 + Math.random() * 26) + 'px';
+            h.style.animationDuration = (6 + Math.random() * 6) + 's';
+            $('#hearts').appendChild(h);
+            setTimeout(() => h.remove(), 12500);
+        }, 400);
+        /* ===== Toast ===== */
+        let tt;
+
+        function toast(msg) {
+            const t = $('#toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(tt);
+            tt = setTimeout(() => t.classList.remove('show'), 1600)
+        }
+        /* ===== PAGE 1: YES / runaway NO ===== */
+        function explode() {
+            for (let i = 0; i < 45; i++) {
+                const h = document.createElement('div');
+                h.className = 'boom';
+                h.textContent = ['❤️', '💖', '💘', '💕'][i % 4];
+                h.style.left = '50vw';
+                h.style.top = '50vh';
+                const a = Math.random() * 6.28,
+                    d = 120 + Math.random() * 320;
+                h.style.setProperty('--x', Math.cos(a) * d + 'px');
+                h.style.setProperty('--y', Math.sin(a) * d + 'px');
+                document.body.appendChild(h);
+                setTimeout(() => h.remove(), 1400);
+            }
+        }
+        $('#yes').onclick = () => {
+            explode();
+            setTimeout(() => go(1), 900)
+        };
+        const no = $('#no');
+        let lastDodge = 0;
+
+        function dodge() {
+            const now = Date.now();
+            if (now - lastDodge < 150) return;
+            lastDodge = now;
+            no.style.position = 'fixed';
+            const w = no.offsetWidth,
+                h = no.offsetHeight,
+                vw = innerWidth,
+                vh = innerHeight;
+            const y = $('#yes').getBoundingClientRect();
+            let x, yy, ok = false;
+            for (let i = 0; i < 40 && !ok; i++) {
+                x = 10 + Math.random() * (vw - w - 20);
+                yy = 60 + Math.random() * (vh - h - 80);
+                // keep clear of the YES button (never block it) and away from current spot
+                const hitYes = x < y.right + 20 && x + w > y.left - 20 && yy < y.bottom + 20 && yy + h > y.top - 20;
+                const cur = no.getBoundingClientRect();
+                const near = Math.hypot(x - cur.left, yy - cur.top) < 120;
+                ok = !hitYes && !near;
+            }
+            no.style.left = x + 'px';
+            no.style.top = yy + 'px';
+            no.style.transform = `rotate(${Math.random()*40-20}deg)`;
+            if (Math.random() < .7) toast(NO_MSGS[Math.floor(Math.random() * NO_MSGS.length)]);
+        }
+        ['pointerenter', 'pointerdown', 'touchstart', 'mousedown', 'focus'].forEach(ev => no.addEventListener(ev, e => {
+            e.preventDefault();
+            dodge()
+        }, {
+            passive: false
+        }));
+        no.addEventListener('click', e => {
+            e.preventDefault();
+            dodge()
+        });
+        // Proximity dodge: runs away before the cursor even reaches it
+        document.addEventListener('mousemove', e => {
+            if (state.step !== 0) return;
+            const r = no.getBoundingClientRect();
+            if (Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2)) < 85) dodge();
+        });
+        addEventListener('resize', () => {
+            if (no.style.position === 'fixed') dodge()
+        });
+        /* ===== PAGE 2: Calendar ===== */
+        const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $('#dows').innerHTML = ['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => `<div class="dow">${d}</div>`).join('');
+
+        function renderCal() {
+            const t = new Date();
+            t.setHours(0, 0, 0, 0);
+            $('#monthLabel').textContent = `${MON[view.m]} ${view.y}`;
+            $('#prev').disabled = view.y === t.getFullYear() && view.m <= t.getMonth(); // no past months
+            const first = new Date(view.y, view.m, 1).getDay(),
+                n = new Date(view.y, view.m + 1, 0).getDate();
+            let html = '<div></div>'.repeat(first);
+            for (let d = 1; d <= n; d++) {
+                const dt = new Date(view.y, view.m, d),
+                    past = dt < t;
+                const sel = state.date && +state.date === +dt,
+                    today = +dt === +t;
+                html += `<button class="day${sel?' sel':''}${today?' today':''}" data-d="${d}" ${past?'disabled':''}>${d}</button>`;
+            }
+            $('#days').innerHTML = html;
+            $('#days').querySelectorAll('.day:not(:disabled)').forEach(b => b.onclick = () => {
+                state.date = new Date(view.y, view.m, +b.dataset.d);
+                $('#confirmDate').disabled = false;
+                $('#dateNote').textContent = 'Selected: ' + fmtDate(state.date) + ' 💕';
+                renderCal();
+            });
+        }
+        const fmtDate = d => d.toLocaleDateString('en-IN', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        $('#prev').onclick = () => {
+            view.m--;
+            if (view.m < 0) {
+                view.m = 11;
+                view.y--
+            }
+            renderCal()
+        };
+        $('#next').onclick = () => {
+            view.m++;
+            if (view.m > 11) {
+                view.m = 0;
+                view.y++
+            }
+            renderCal()
+        };
+        $('#time').onchange = e => state.time = e.target.value;
+        $('#confirmDate').onclick = () => {
+            state.time = $('#time').value;
+            $('#dateNote').textContent = `Booked: ${fmtDate(state.date)} at ${state.time} ❤️`;
+            setTimeout(() => go(2), 900);
+        };
+        /* ===== PAGE 3: Locations ===== */
+        function renderLocs() {
+            $('#locs').innerHTML = LOCS.map((l, i) => `<div class="loc${state.loc===l.n?' sel':''}" data-i="${i}"><span class="e">${l.e}</span><h2>${l.n}</h2><small>${l.d}</small></div>`).join('');
+            $('#locs').querySelectorAll('.loc').forEach(c => c.onclick = () => {
+                state.loc = LOCS[c.dataset.i].n;
+                $('#lockLoc').disabled = false;
+                renderLocs()
+            });
+        }
+        $('#lockLoc').onclick = () => go(3);
+        /* ===== PAGE 4: Menu + cart ===== */
+        function renderMenu() {
+            $('#menu').innerHTML = MENU.map(m => `<div class="food"><span class="e">${m.e}</span><h2>${m.n}</h2><small>${m.d}</small><div class="price">₹${m.p}</div><button class="btn" data-add="${m.id}">Add to Cart 🛒</button></div>`).join('');
+            $('#menu').querySelectorAll('[data-add]').forEach(b => b.onclick = () => {
+                const id = b.dataset.add;
+                state.cart[id] = (state.cart[id] || 0) + 1;
+                renderCart()
+            });
+        }
+        const cartTotal = () => Object.entries(state.cart).reduce((s, [id, q]) => s + MENU[id].p * q, 0);
+        const cartCount = () => Object.values(state.cart).reduce((s, q) => s + q, 0);
+
+        function renderCart() {
+            const ids = Object.keys(state.cart);
+            $('#cartList').innerHTML = ids.length ? ids.map(id => `<div class="ci"><span>${MENU[id].e} ${MENU[id].n} (₹${MENU[id].p})</span><span class="q"><button data-m="${id}">−</button><b>${state.cart[id]}</b><button data-p="${id}">+</button><button class="rm" data-r="${id}">✕</button></span></div>`).join('') : '<p>Cart is empty. Even your boyfriend\'s wallet is emptier 😂</p>';
+            $('#cartList').querySelectorAll('[data-p]').forEach(b => b.onclick = () => {
+                state.cart[b.dataset.p]++;
+                renderCart()
+            });
+            $('#cartList').querySelectorAll('[data-m]').forEach(b => b.onclick = () => {
+                const id = b.dataset.m;
+                if (--state.cart[id] <= 0) delete state.cart[id];
+                renderCart()
+            });
+            $('#cartList').querySelectorAll('[data-r]').forEach(b => b.onclick = () => {
+                delete state.cart[b.dataset.r];
+                renderCart()
+            });
+            $('#cnt').textContent = cartCount();
+            $('#tot').textContent = cartTotal();
+            $('#pay').disabled = cartCount() === 0;
+        }
+        $('#pay').onclick = () => {
+            $('#payTot').textContent = cartTotal();
+            go(4)
+        };
+        /* ===== PAGE 5: Payment ===== */
+        // Decorative broken QR pattern
+        $('#qr').innerHTML = Array.from({
+            length: 49
+        }, () => `<b class="${Math.random()<.45?'o':''}"></b>`).join('');
+        $('#askBf').onclick = () => $('#modal').classList.add('show');
+        $('#closeModal').onclick = () => $('#modal').classList.remove('show');
+        $('#finePay').onclick = () => {
+            $('#fVenue').textContent = state.loc;
+            $('#fDate').textContent = fmtDate(state.date);
+            $('#fTime').textContent = state.time;
+            $('#fMenu').textContent = Object.entries(state.cart).map(([id, q]) => `${MENU[id].n} ×${q}`).join(', ') + ` (₹${cartTotal()})`;
+            explode();
+            goEnd();
+        };
+        /* ===== Reset ===== */
+        $('#again').onclick = () => {
+            resetState();
+            no.style.position = '';
+            no.style.left = no.style.top = no.style.transform = '';
+            $('#confirmDate').disabled = true;
+            $('#lockLoc').disabled = true;
+            $('#dateNote').textContent = '';
+            $('#time').selectedIndex = 0;
+            renderCal();
+            renderLocs();
+            renderMenu();
+            renderCart();
+            go(0);
+        };
+        /* ===== Init ===== */
+        resetState();
+        renderProgress(0);
+        renderCal();
+        renderLocs();
+        renderMenu();
+        renderCart();
+    </script>
+</body>
+
+</html>
